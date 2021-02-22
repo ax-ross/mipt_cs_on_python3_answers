@@ -35,11 +35,29 @@ def draw_clouds(x, y, r, window):
     cloud.draw(window)
 
 
+def draw_tree(x, y, window):
+    def draw_crown(x, y, window):
+        crown = gr.Polygon(gr.Point(x + 80, y), gr.Point(x + 80, y), gr.Point(x - 80, y), gr.Point(x, y - 80))
+        crown.setFill('green')
+        crown.setWidth(3)
+        crown.draw(window)
+
+    stem = gr.Rectangle(gr.Point(x - 5, y), gr.Point(x + 5, y + 80))
+    stem.setFill('brown')
+    stem.setWidth(3)
+    stem.draw(window)
+
+    draw_crown(x, y, window)
+    draw_crown(x, y - 55, window)
+    draw_crown(x, y - 110, window)
+
+
 def main():
     window = gr.GraphWin('Test', 800, 800)
     draw_sky(window, 800, 800)
     draw_sun(100, 100, window)
     draw_clouds(300, 100, 25, window)
+    draw_tree(500, 430, window)
     window.getMouse()
     window.close()
 
