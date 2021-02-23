@@ -8,7 +8,7 @@ def draw_sky(window, width, height):
 
 
 def draw_sun(x, y, window):
-    sun = gr.Circle(gr.Point(x, y), 20)
+    sun = gr.Circle(gr.Point(x, y), 50)
     sun.setFill('yellow')
     sun.draw(window)
 
@@ -52,12 +52,50 @@ def draw_tree(x, y, window):
     draw_crown(x, y - 110, window)
 
 
+def draw_house(x, y, window):
+    def draw_roof(x, y, window):
+        roof = gr.Polygon(gr.Point(x, y), gr.Point(x, y), gr.Point(x + 250, y), gr.Point(x + 125, y - 125))
+        roof.setFill('brown')
+        roof.setWidth(3)
+        roof.draw(window)
+
+    def draw_facade(x, y, window):
+        facade = gr.Rectangle(gr.Point(x, y), gr.Point(x + 250, y + 250))
+        facade.setFill('grey')
+        facade.setWidth(3)
+        facade.draw(window)
+
+    def draw_casement(x, y, window):
+        casement = gr.Rectangle(gr.Point(x + 80, y + 80), gr.Point(x + 170, y + 170))
+        casement.setFill('yellow')
+        casement.setWidth(3)
+        casement.draw(window)
+        casement = gr.Line(gr.Point(x + 125, y + 80), gr.Point(x + 125, y + 170))
+        casement.setWidth(3)
+        casement.draw(window)
+        casement = gr.Line(gr.Point(x + 80, y + 125), gr.Point(x + 170, y + 125))
+        casement.setWidth(3)
+        casement.draw(window)
+
+    draw_roof(x, y, window)
+    draw_facade(x, y, window)
+    draw_casement(x, y, window)
+
+
+def draw_earth(window, width, height):
+    earth = gr.Rectangle(gr.Point(0, height / 2), gr.Point(width, height))
+    earth.setFill('silver')
+    earth.draw(window)
+
+
 def main():
     window = gr.GraphWin('Test', 800, 800)
     draw_sky(window, 800, 800)
-    draw_sun(100, 100, window)
-    draw_clouds(300, 100, 25, window)
-    draw_tree(500, 430, window)
+    draw_earth(window, 800, 800)
+    draw_sun(600, 100, window)
+    draw_clouds(200, 100, 25, window)
+    draw_tree(650, 500, window)
+    draw_house(150, 300, window)
     window.getMouse()
     window.close()
 
