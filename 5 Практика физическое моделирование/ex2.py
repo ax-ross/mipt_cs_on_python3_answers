@@ -29,12 +29,18 @@ def update_velocity(velocity, acceleration):
 
 
 flag = True
-
+dy = -0.5
 while True:
     velocity = update_velocity(velocity, acceleration)
-    ball.move(velocity.x, velocity.y)
-    gr.time.sleep(0.02)
+    ball.move(velocity.x, dy)
+    gr.time.sleep(0.04)
     if velocity.x < -6 or velocity.x > 6:
         acceleration.x = -acceleration.x
-
-    print(velocity)
+    if velocity.x < 0 and acceleration.x < 0:
+        dy = 0.5
+    elif velocity.x < 0 and acceleration.x > 0:
+        dy = -0.5
+    elif velocity.x > 0 and acceleration.x > 0:
+        dy = 0.5
+    else:
+        dy = -0.5
